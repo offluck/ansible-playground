@@ -1,0 +1,5 @@
+debian:
+  secret_file_path: <secret>
+
+alpine:
+  password: <secret>

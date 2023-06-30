@@ -1,0 +1,10 @@
+[Unit]
+Description=FreeLABorga Server
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart=/home/offluck/ansible/freeLABorga-main/target/release/laborverwaltung
+
+[Install]
+WantedBy=multi-user.target
