@@ -7,4 +7,5 @@
 .vscode/
 
 # Secrets
-variables.yaml
+src/host_vars/*.yaml
+!src/host_vars/example.*.yaml

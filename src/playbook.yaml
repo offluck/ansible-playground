@@ -1,4 +1,4 @@
-- name: "Install FreeLABorga on Linux servers"
+- name: "Run FreeLABorga on Linux servers"
   hosts: linux
   become: yes
   become_user: offluck
@@ -99,3 +99,11 @@
         daemon_reload: true
       become: yes
       become_user: root
+
+- name: "Run FreeLABorga on UNIX servers"
+  hosts: unix
+  become: yes
+  become_user: offluck
+  tasks:
+    - name: Ping hosts
+      ansible.builtin.ping:

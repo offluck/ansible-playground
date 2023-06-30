@@ -1,21 +1,21 @@
 linux:
   hosts:
-    debian:
-      ansible_user: offluck
-      ansible_ssh_private_key_file: {{ secret_file_path }}
-      ansible_host: localhost
-      ansible_port: 2222
+    # debian:
+    #   ansible_user: offluck
+    #   ansible_ssh_private_key_file: '{{ secret_file_path }}'
+    #   ansible_host: localhost
+    #   ansible_port: 2222
     
     # alpine:
     #   ansible_user: offluck
-    #   ansible_password: {{ password }}
+    #   ansible_password: '{{ password }}'
     #   ansible_host: localhost
     #   ansible_port: 2221
 
 unix:
   hosts:
-    # net_bsd:
-    #   ansible_user: offluck
-    #   ansible_password: {{ password }}
-    #   ansible_host: localhost
-    #   ansible_port: 2223
+    net_bsd:
+      ansible_user: offluck
+      ansible_password: '{{ password }}'
+      ansible_host: localhost
+      ansible_port: 2223
