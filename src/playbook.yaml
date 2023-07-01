@@ -1,7 +1,5 @@
 - name: "Run FreeLABorga on Linux servers"
   hosts: linux
-  become: yes
-  become_user: offluck
   tasks:
     - name: Ping hosts
       ansible.builtin.ping:
@@ -102,8 +100,6 @@
 
 - name: "Run FreeLABorga on UNIX servers"
   hosts: unix
-  become: yes
-  become_user: offluck
   tasks:
     - name: Ping hosts
       ansible.builtin.ping:

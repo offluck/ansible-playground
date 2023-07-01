@@ -4,7 +4,7 @@
 This repo is dedicated to Ansible HW
 
 ## Prerequisites
-Let's assume have 3 servers with different operating systems:
+Let's assume we have 3 servers with different operating systems:
 - Alpine
 - Debian
 - NetBSD
