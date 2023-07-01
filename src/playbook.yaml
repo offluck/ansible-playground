@@ -1,102 +1,100 @@
-# - name: "Run FreeLABorga on Linux servers"
-#   hosts: linux
-#   tasks:
-#     - name: Ping hosts
-#       ansible.builtin.ping:
+- name: "Run FreeLABorga on Linux servers"
+  hosts: linux
+  tasks:
+    - name: Ping hosts
+      ansible.builtin.ping:
 
-#     - name: Update APT
-#       ansible.builtin.apt:
-#         update_cache: yes
-#         upgrade: yes
-#       become: true
-#       become_user: root
+    - name: Update APT
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: yes
+      become: true
+      become_user: root
 
-#     - name: Install WGet
-#       ansible.builtin.apt:
-#         name: wget
-#         state: present
-#       become: true
-#       become_user: root
+    - name: Install WGet
+      ansible.builtin.apt:
+        name: wget
+        state: present
+      become: true
+      become_user: root
 
-#     - name: Install UnZip
-#       ansible.builtin.apt:
-#         name: unzip
-#         state: present
-#       become: true
-#       become_user: root
+    - name: Install UnZip
+      ansible.builtin.apt:
+        name: unzip
+        state: present
+      become: true
+      become_user: root
 
-#     - name: Install Rust dependencies
-#       ansible.builtin.apt:
-#         pkg:
-#           - bash
-#           - curl
-#           - build-essential
-#           - gcc
-#           - make
-#         state: present
-#       become: true
-#       become_user: root
+    - name: Install Rust dependencies
+      ansible.builtin.apt:
+        pkg:
+          - bash
+          - curl
+          - build-essential
+          - gcc
+          - make
+        state: present
+      become: true
+      become_user: root
 
-#     - name: Download Rust installer
-#       ansible.builtin.get_url:
-#         url: https://sh.rustup.rs
-#         dest: /tmp/sh.rustup.rs
-#         mode: 0777
-#         force: yes
-#       tags:
-#         - rust
-#       become: true
-#       become_user: root
+    - name: Download Rust installer
+      ansible.builtin.get_url:
+        url: https://sh.rustup.rs
+        dest: /tmp/sh.rustup.rs
+        mode: 0777
+        force: yes
+      tags:
+        - rust
+      become: true
+      become_user: root
 
-#     - name: Install Rust
-#       ansible.builtin.shell: /tmp/sh.rustup.rs -y
-#       tags:
-#         - rust
-#       args:
-#         executable: /bin/bash
+    - name: Install Rust
+      ansible.builtin.shell: /tmp/sh.rustup.rs -y
+      tags:
+        - rust
+      args:
+        executable: /bin/bash
 
-#     - name: Add Cargo to PATH
-#       ansible.builtin.shell: export PATH=\${PATH}:\${HOME}/.cargo/bin
-#       args:
-#         chdir: /home/offluck
-#       args:
-#         executable: /bin/bash
+    - name: Add Cargo to PATH
+      ansible.builtin.shell: export PATH=\${PATH}:\${HOME}/.cargo/bin
+      args:
+        executable: /bin/bash
 
-#     - name: Download FreeLABorga
-#       ansible.builtin.get_url:
-#         url: https://github.com/freeLABorga/freeLABorga/archive/refs/heads/main.zip
-#         dest: ${HOME}/ansible/freelaborga.zip
-#         mode: 0666
-#         force: yes
+    - name: Download FreeLABorga
+      ansible.builtin.get_url:
+        url: https://github.com/freeLABorga/freeLABorga/archive/refs/heads/main.zip
+        dest: ${HOME}/ansible/freelaborga.zip
+        mode: 0666
+        force: yes
 
-#     - name: Unzip FreeLABorga
-#       ansible.builtin.unarchive:
-#         src: ${HOME}/ansible/freelaborga.zip
-#         dest: ${HOME}/ansible
-#         remote_src: yes
+    - name: Unzip FreeLABorga
+      ansible.builtin.unarchive:
+        src: ${HOME}/ansible/freelaborga.zip
+        dest: ${HOME}/ansible
+        remote_src: yes
 
-#     - name: Build FreeLABorga
-#       ansible.builtin.shell: bash -lc "cargo build --release --verbose --verbose"
-#       args:
-#         chdir: ${HOME}/ansible/freeLABorga-main
+    - name: Build FreeLABorga
+      ansible.builtin.shell: bash -lc "cargo build --release --verbose --verbose"
+      args:
+        chdir: ${HOME}/ansible/freeLABorga-main
 
-#     - name: Add FreeLABorga
-#       ansible.builtin.template:
-#         src: ../templates/freelaborga.service.j2
-#         dest: /etc/systemd/system/freelaborga.service
-#         owner: offluck
-#         mode: 0644
-#       become: yes
-#       become_user: root
+    - name: Add FreeLABorga
+      ansible.builtin.template:
+        src: ../templates/freelaborga.service.j2
+        dest: /etc/systemd/system/freelaborga.service
+        owner: offluck
+        mode: 0644
+      become: yes
+      become_user: root
 
-#     - name: Run FreeLABorga
-#       ansible.builtin.systemd:
-#         name: freelaborga
-#         state: restarted
-#         enabled: yes
-#         daemon_reload: true
-#       become: yes
-#       become_user: root
+    - name: Run FreeLABorga
+      ansible.builtin.systemd:
+        name: freelaborga
+        state: restarted
+        enabled: yes
+        daemon_reload: true
+      become: yes
+      become_user: root
 
 - name: "Run FreeLABorga on UNIX servers"
   hosts: unix
@@ -119,8 +117,49 @@
         executable: /bin/sh
 
     - name: Install Rust dependencies
-      ansible.builtin.shell: pkgin install bash curl build-essential gcc make
+      ansible.builtin.shell: pkgin install curl build-essential gcc make
       become: true
       become_user: root
       args:
         executable: /bin/sh
+
+    - name: Download Rust installer
+      ansible.builtin.get_url:
+        url: https://sh.rustup.rs
+        dest: /tmp/sh.rustup.rs
+        mode: 0777
+        force: yes
+      tags:
+        - rust
+      become: true
+      become_user: root
+
+    - name: Install Rust
+      ansible.builtin.shell: /tmp/sh.rustup.rs -y
+      tags:
+        - rust
+      args:
+        executable: /bin/bash
+
+    - name: Add Cargo to PATH
+      ansible.builtin.shell: export PATH=\${PATH}:\${HOME}/.cargo/bin
+      args:
+        executable: /bin/sh
+
+    - name: Download FreeLABorga
+      ansible.builtin.get_url:
+        url: https://github.com/freeLABorga/freeLABorga/archive/refs/heads/main.zip
+        dest: ${HOME}/ansible/freelaborga.zip
+        mode: 0666
+        force: yes
+
+    - name: Unzip FreeLABorga
+      ansible.builtin.unarchive:
+        src: ${HOME}/ansible/freelaborga.zip
+        dest: ${HOME}/ansible
+        remote_src: yes
+
+    - name: Build FreeLABorga
+      ansible.builtin.shell: bash -lc "cargo build --release --verbose --verbose"
+      args:
+        chdir: ${HOME}/ansible/freeLABorga-main
