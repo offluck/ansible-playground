@@ -9,7 +9,7 @@ Let's assume we have 3 servers with different operating systems:
 - Debian
 - NetBSD
 
-And we are to create IaC with Ansible to easily deploy FreeLABorga application on all our machines
+And we are to create IaC with Ansible to easily deploy [FreeLABorga](https://github.com/freeLABorga/freeLABorga) application on all our machines
 
 ## Project structure
 ```
