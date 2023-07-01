@@ -47,6 +47,6 @@ ansible-playbook -i src/inventory.yaml src/playbook.yaml
   - [X] Project run
 - NetBSD
   - [X] Ping
-  - [ ] Dependencies installation
-  - [ ] Project installation
+  - [X] Dependencies installation
+  - [X] Project installation
   - [ ] Project run
