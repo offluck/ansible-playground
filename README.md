@@ -5,9 +5,9 @@ This repo is dedicated to Ansible HW
 
 ## Prerequisites
 Let's assume we have 3 servers with different operating systems:
-- Alpine
-- Debian
-- NetBSD
+- Alpine (SSH over user/password connection)
+- Debian (SSH over RSA keys connection)
+- NetBSD (SSH over user/password connection)
 
 And we are to create IaC with Ansible to easily deploy [FreeLABorga](https://github.com/freeLABorga/freeLABorga) application on all our machines
 
